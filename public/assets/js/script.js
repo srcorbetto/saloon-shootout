@@ -1,20 +1,27 @@
 const gun = document.getElementById('gun');
+const flash = document.getElementById('flash');
+let recoil = false;
 
 document.getElementById('box').addEventListener('mouseenter', e => {
     gun.setAttribute('animation__recoil', {
         property: 'rotation',
         to: '-11 183 0',
-        dur: 25
+        dur: 50
     });
     gun.setAttribute('animation__reset', {
         property: 'rotation',
         to: '0 183 0',
-        dur: 75,
-        delay: 45
+        dur: 200,
+        delay: 100
     });
-    console.log(gun.attributes);
-    // gun.removeAttribute('animation__recoil');
-    // gun.removeAttribute('animation__reset');
+    flash.setAttribute('opacity', 1);
+    setTimeout(() => {
+        flash.setAttribute('opacity', 0);
+    }, 150);
+    setTimeout(() => {
+        gun.removeAttribute('animation__recoil');
+        gun.removeAttribute('animation__reset');
+    }, 400);
 });
 
 // document.getElementById('my-camera')
