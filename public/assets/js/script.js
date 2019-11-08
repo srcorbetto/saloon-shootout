@@ -2,7 +2,7 @@ const gun = document.getElementById('gun');
 const flash = document.getElementById('flash');
 let recoil = false;
 
-document.getElementById('box').addEventListener('mouseenter', e => {
+document.getElementById('bad-guy').addEventListener('mouseenter', e => {
     gun.setAttribute('animation__recoil', {
         property: 'rotation',
         to: '-11 183 0',
