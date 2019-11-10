@@ -25,6 +25,8 @@
                 <a-asset-item id="saloonGltf" src="/assets/models/saloon/Saloon.gltf" />
                 <a-asset-item id="cactusGltf" src="/assets/models/PipeOrganCactus/PipeOrganCactus.gltf" />
                 <a-asset-item id="mtnGltf" src="/assets/models/CUPIC_MONTAIN/CUPIC_MONTAIN.gltf" />
+                <a-asset-item id="barrelGltf" src="/assets/models/Barrel/Barrel.gltf" />
+                <a-asset-item id="tumbleweedGltf" src="/assets/models/tumbleweed/model.gltf" />
                 <img id="bang" src="/assets/img/bang.png" />
                 <img id="sand" src="/assets/img/sand-900x900.jpg" />
                 <img id="cowboy" src="/assets/img/cowboy.png" />
@@ -74,6 +76,21 @@
                           src="#cactusGltf"
                           position="8 0 -.75"
                           scale=".5 .5 .5">
+            </a-gltf-model>
+
+            <!-- Barrel -->
+            <a-gltf-model id="barrel"
+                          src="#barrelGltf"
+                          position="8 0 -.75"
+                          scale=".5 .5 .5">
+            </a-gltf-model>
+
+            <!-- Tumbleweed -->
+            <a-gltf-model id="tumbleweed"
+                          src="#tumbleweedGltf"
+                          position="-.5 -.5 .5"
+                          scale=".75 .75 .75"
+                          animation="property: rotation; to: 360 0 0; loop: true; dur: 1000">
             </a-gltf-model>
 
             <!-- Mountain -->
