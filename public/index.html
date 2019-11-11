@@ -13,18 +13,9 @@
 
     <!-- Camera Package -->
     <!-- <script src="https://rawgit.com/urish/aframe-camera-events/master/index.js"></script> -->
-    <style>
-        button {
-            position: absolute;
-            left: 10px;
-            top: 10px;
-            z-index: 300;
-        }
-    </style>
 </head>
     </head>
     <body>
-        <button onclick="onClick()">Yes</button>
         <a-scene>
 
             <!-- Preloaded Assets -->
@@ -35,7 +26,7 @@
                 <a-asset-item id="cactusGltf" src="/assets/models/PipeOrganCactus/PipeOrganCactus.gltf" />
                 <a-asset-item id="mtnGltf" src="/assets/models/CUPIC_MONTAIN/CUPIC_MONTAIN.gltf" />
                 <a-asset-item id="barrelGltf" src="/assets/models/Barrel/Barrel.gltf" />
-                <a-asset-item id="tumbleweedGltf" src="/assets/models/tumbleweed/model.gltf" />
+                <a-asset-item id="balloonGltf" src="/assets/models/Balloon/Balloon.gltf" />
                 <img id="bang" src="/assets/img/bang.png" />
                 <img id="sand" src="/assets/img/sand-900x900.jpg" />
                 <img id="cowboy" src="/assets/img/cowboy.png" />
@@ -95,12 +86,12 @@
                           scale=".5 .5 .5">
             </a-gltf-model>
 
-            <!-- Tumbleweed -->
-            <a-gltf-model id="tumbleweed"
-                          src="#tumbleweedGltf"
-                          position="-.5 -.5 .5"
-                          scale=".75 .75 .75"
-                          animation="property: rotation; to: 360 0 0; loop: true; dur: 1000">
+            <!-- Balloon -->
+            <a-gltf-model id="balloon"
+                          src="#balloonGltf"
+                          position="0 3 0.5"
+                          scale="3 3 3"
+                          animation="property: position; to: 0 4 0.5; loop: true; dur: 3000; dir: alternate">
             </a-gltf-model>
 
             <!-- Mountain -->
