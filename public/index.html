@@ -10,9 +10,6 @@
 
     <!-- AFrame -->
     <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-
-    <!-- Camera Package -->
-    <!-- <script src="https://rawgit.com/urish/aframe-camera-events/master/index.js"></script> -->
 </head>
     </head>
     <body>
@@ -87,11 +84,19 @@
             </a-gltf-model>
 
             <!-- Balloon -->
-            <a-gltf-model id="balloon"
+            <a-gltf-model id="balloon1"
+                          class="balloon"
                           src="#balloonGltf"
                           position="0 3 0.5"
                           scale="3 3 3"
                           animation="property: position; to: 0 4 0.5; loop: true; dur: 3000; dir: alternate">
+            </a-gltf-model>
+            <a-gltf-model id="balloon2"
+                          class="balloon"
+                          src="#balloonGltf"
+                          position="-1.7 3 0.5"
+                          scale="3 3 3"
+                          animation="property: position; to: -1.7 4 0.5; loop: true; dur: 3000; dir: alternate">
             </a-gltf-model>
 
             <!-- Mountain -->
@@ -132,6 +137,12 @@
                      roughness="2">
             </a-plane>
         </a-scene>
+
+        <!-- jQuery -->
+        <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 
         <!-- Logic -->
         <script src="/assets/js/script.js" async defer></script>
