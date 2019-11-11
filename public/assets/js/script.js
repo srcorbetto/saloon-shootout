@@ -2,6 +2,18 @@ const gun = document.getElementById('gun');
 const flash = document.getElementById('flash');
 let recoil = false;
 
+DeviceMotionEvent.requestPermission()
+.then(response => {
+  if (response == 'granted') {
+    window.addEventListener('devicemotion', (e) => {
+      // do something with e
+    })
+  }
+})
+.catch(console.error)
+
+// document.getElementById('myHTML').addEventListener()
+
 document.getElementById('bad-guy').addEventListener('mouseenter', e => {
     gun.setAttribute('animation__recoil', {
         property: 'rotation',
