@@ -11,25 +11,30 @@ const createBalloon = () => {
             class: 'balloon',
             position: '0 3 0.5',
             scale: '3 3 3',
-            animation: 'property: position; to: 0 4 0.5; loop: true; dur: 3000; dir: alternate'
+            animation: 'property: position; to: 0 4 0.5; loop: true; dur: 3000; dir: alternate',
+            src: '#balloonGltf'
         },
         {
             id: 'balloonB',
             class: 'balloon',
             position: '-1.7 3 0.5',
             scale: '3 3 3',
-            animation: 'property: position; to: -1.7 4 0.5; loop: true; dur: 3000; dir: alternate'
+            animation: 'property: position; to: -1.7 4 0.5; loop: true; dur: 3000; dir: alternate',
+            src: '#balloonGltf'
         }
     ];
-    console.log(balloonAnimations[0].position);
+    console.log(balloonAnimations[0]);
     sceneElement.appendChild(balloonElement);
-    balloonElement.setAttribute('id', balloonAnimations[0].id);
-    balloonElement.setAttribute('class', balloonAnimations[0].class);
-    balloonElement.setAttribute('position', balloonAnimations[0].position);
-    balloonElement.setAttribute('scale', balloonAnimations[0].scale);
-    balloonElement.setAttribute('animation', balloonAnimations[0].animation);
-    balloonElement.addEventListener('mouseenter', shootBalloon, false);
-    console.log(balloonElement);
+    balloonElement.addEventListener('loaded', e => {
+        balloonElement.setAttribute('id', balloonAnimations[0].id);
+        balloonElement.setAttribute('class', balloonAnimations[0].class);
+        balloonElement.setAttribute('position', balloonAnimations[0].position);
+        balloonElement.setAttribute('src', balloonAnimations[0].src);
+        balloonElement.setAttribute('scale', balloonAnimations[0].scale);
+        balloonElement.setAttribute('animation', balloonAnimations[0].animation);
+        balloonElement.addEventListener('mouseenter', shootBalloon, false);
+        console.log(e);
+    })
 }
 
 const gunShot = () => {
