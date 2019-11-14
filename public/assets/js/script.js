@@ -1,6 +1,44 @@
+const sceneElement = document.querySelector('a-scene');
+const camera = document.getElementById('my-camera');
 const gun = document.getElementById('gun');
 const flash = document.getElementById('flash');
-const classname = document.getElementsByClassName('balloon');
+let score = 0;
+let lives = 3;
+let timer = 3;
+let lifeTimer;
+let gameStart = false;
+
+const startGame = () => {
+    const badGuy = document.getElementById('bad-guy');
+
+    badGuy.addEventListener('mouseenter', e => {
+       if (gameStart === false) {
+           gameStart = true;
+           createBalloon();
+           lifeTimer = setInterval(() => {
+                lives--;
+                if (lives === 0) {
+                    console.log('Game Over');
+                    clearInterval(lifeTimer);
+                    restartGame();
+                };
+                console.log(`Lives: ${lives}`);
+        }, 3000);
+       }
+    });
+}
+
+const restartGame = () => {
+    gameStart = false;
+    score = 0;
+    lives = 3;
+    timer = 3;
+
+    const remainingBaloons = sceneElement.querySelectorAll('.balloon');
+    for (let i = 0; i < remainingBaloons.length; i++) {
+        remainingBaloons[i].parentNode.removeChild(remainingBaloons[i]);
+      }
+}
 
 const createBalloon = () => {
     const balloonAnimations = [
@@ -37,7 +75,6 @@ const createBalloon = () => {
             src: '#balloonGltf'
         }
     ];
-    const sceneElement = document.querySelector('a-scene');
     const balloonElement = document.createElement('a-gltf-model');
     const arrayLenth = balloonAnimations.length - 1;
     const randomNumber = Math.floor(Math.random() * (arrayLenth - 0 + 1)) + 0; //The maximum is inclusive and the minimum is inclusive
@@ -51,7 +88,7 @@ const createBalloon = () => {
         balloonElement.setAttribute('scale', balloonAnimations[randomNumber].scale);
         balloonElement.setAttribute('animation', balloonAnimations[randomNumber].animation);
         balloonElement.addEventListener('mouseenter', shootBalloon, false);
-    })
+    });
 }
 
 const gunShot = () => {
@@ -80,12 +117,31 @@ const shootBalloon = e => {
     const targetBaloon = document.getElementById(e.target.id);
     gunShot();
     targetBaloon.parentNode.removeChild(targetBaloon);
+    score++;
+    lives = 3;
+    console.log(`Score: ${score}`)
     setTimeout(() => {
         createBalloon();
     }, 1000);
 };
 
-createBalloon();
+const windowResize = () => {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    // console.log(window.innerWidth,window.innerHeight)
+    if (screenWidth <= 414) {
+        gun.setAttribute('position', '.3 -1 -1.4')
+    }
+}
+
+// Game start
+// ================================================================
+
+window.addEventListener('resize', windowResize);
+startGame();
+
+// ================================================================
+
 // for (let i = 0; i < classname.length; i++) {
 //     classname[i].addEventListener('mouseenter', shootBalloon, false);
 // }
