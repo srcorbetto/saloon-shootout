@@ -1,0 +1,9 @@
+.ammo-holder {
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - 100px);
+    width: 200px;
+    height: 100px;
+    background: #333333;
+    z-index: 300;
+}

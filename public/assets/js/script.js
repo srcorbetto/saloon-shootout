@@ -32,7 +32,7 @@ const startGame = () => {
                 //  console.log(`Lives: ${lives}`);
          }, 1000);
         }
-     });
+    });
 }
 
 const restartGame = () => {
