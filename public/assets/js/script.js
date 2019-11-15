@@ -4,7 +4,8 @@ const gun = document.getElementById('gun');
 const flash = document.getElementById('flash');
 let score = 0;
 let lives = 3;
-let timer = 3;
+let timer = 10;
+let ammo = 6;
 let lifeTimer;
 let gameStart = false;
 
@@ -12,69 +13,43 @@ const startGame = () => {
     const badGuy = document.getElementById('bad-guy');
 
     badGuy.addEventListener('mouseenter', e => {
-       if (gameStart === false) {
-           gameStart = true;
-           createBalloon();
-           lifeTimer = setInterval(() => {
-                lives--;
-                if (lives === 0) {
-                    console.log('Game Over');
-                    clearInterval(lifeTimer);
-                    restartGame();
+        if (gameStart === false) {
+            gameStart = true;
+            createBalloon();
+            lifeTimer = setInterval(() => {
+                 timer--;
+                 console.log(`timer: ${timer}`);
+                 if (timer === 0) {
+                     lives--;
+                     console.log(`lives: ${lives}`)
+                     timer = 10;
+                     if (lives === 0) {
+                        console.log('Game Over');
+                        clearInterval(lifeTimer);
+                        restartGame();
+                     };
                 };
-                console.log(`Lives: ${lives}`);
-        }, 3000);
-       }
-    });
+                //  console.log(`Lives: ${lives}`);
+         }, 1000);
+        }
+     });
 }
 
 const restartGame = () => {
     gameStart = false;
     score = 0;
     lives = 3;
-    timer = 3;
+    timer = 10;
+    ammo = 6;
 
     const remainingBaloons = sceneElement.querySelectorAll('.balloon');
     for (let i = 0; i < remainingBaloons.length; i++) {
         remainingBaloons[i].parentNode.removeChild(remainingBaloons[i]);
-      }
+    }
 }
 
 const createBalloon = () => {
-    const balloonAnimations = [
-        {
-            id: 'balloonA',
-            class: 'balloon',
-            position: '0 3 0.5',
-            scale: '3 3 3',
-            animation: 'property: position; to: 0 4 0.5; loop: true; dur: 3000; dir: alternate',
-            src: '#balloonGltf'
-        },
-        {
-            id: 'balloonB',
-            class: 'balloon',
-            position: '-1.7 3 0.5',
-            scale: '3 3 3',
-            animation: 'property: position; to: -1.7 4 0.5; loop: true; dur: 3000; dir: alternate',
-            src: '#balloonGltf'
-        },
-        {
-            id: 'balloonC',
-            class: 'balloon',
-            position: '-3 3 0.5',
-            scale: '3 3 3',
-            animation: 'property: position; to: -3 4 0.5; loop: true; dur: 3000; dir: alternate',
-            src: '#balloonGltf'
-        },
-        {
-            id: 'balloonD',
-            class: 'balloon',
-            position: '5 3 0.5',
-            scale: '3 3 3',
-            animation: 'property: position; to: 5 4 0.5; loop: true; dur: 3000; dir: alternate',
-            src: '#balloonGltf'
-        }
-    ];
+    // Balloon animations go here if there's an issue...
     const balloonElement = document.createElement('a-gltf-model');
     const arrayLenth = balloonAnimations.length - 1;
     const randomNumber = Math.floor(Math.random() * (arrayLenth - 0 + 1)) + 0; //The maximum is inclusive and the minimum is inclusive
@@ -118,7 +93,7 @@ const shootBalloon = e => {
     gunShot();
     targetBaloon.parentNode.removeChild(targetBaloon);
     score++;
-    lives = 3;
+    timer = 10;
     console.log(`Score: ${score}`)
     setTimeout(() => {
         createBalloon();
@@ -139,6 +114,8 @@ const windowResize = () => {
 
 window.addEventListener('resize', windowResize);
 startGame();
+
+console.log(balloonAnimations);
 
 // ================================================================
 
