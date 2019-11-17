@@ -1,3 +1,5 @@
+const vrButton = document.querySelector('.a-enter-vr-button');
+const timerElement = document.querySelector('.timer');
 const sceneElement = document.querySelector('a-scene');
 const camera = document.getElementById('my-camera');
 const gun = document.getElementById('gun');
@@ -18,11 +20,14 @@ const startGame = () => {
             createBalloon();
             lifeTimer = setInterval(() => {
                  timer--;
+                 timerElement.innerHTML = timer;
                  console.log(`timer: ${timer}`);
                  if (timer === 0) {
                      lives--;
+                     displayHearts();
                      console.log(`lives: ${lives}`)
                      timer = 10;
+                     timerElement.innerHTML = timer;
                      if (lives === 0) {
                         console.log('Game Over');
                         clearInterval(lifeTimer);
@@ -67,6 +72,8 @@ const createBalloon = () => {
 }
 
 const gunShot = () => {
+    ammo--;
+    console.log(ammo);
     gun.setAttribute('animation__recoil', {
         property: 'rotation',
         to: '-11 183 0',
@@ -78,9 +85,9 @@ const gunShot = () => {
         dur: 200,
         delay: 100
     });
-    flash.setAttribute('opacity', 1);
+    flash.setAttribute('scale', '1.25 1.25 1.25');
     setTimeout(() => {
-        flash.setAttribute('opacity', 0);
+        flash.setAttribute('scale', '0 0 0');
     }, 150);
     setTimeout(() => {
         gun.removeAttribute('animation__recoil');
@@ -89,16 +96,37 @@ const gunShot = () => {
 }
 
 const shootBalloon = e => {
-    const targetBaloon = document.getElementById(e.target.id);
-    gunShot();
-    targetBaloon.parentNode.removeChild(targetBaloon);
-    score++;
-    timer = 10;
-    console.log(`Score: ${score}`)
-    setTimeout(() => {
-        createBalloon();
-    }, 1000);
+    if (ammo > 0) {
+        const targetBaloon = document.getElementById(e.target.id);
+        gunShot();
+        targetBaloon.parentNode.removeChild(targetBaloon);
+        score++;
+        timer = 10;
+        timerElement.innerHTML = timer;
+        console.log(`Score: ${score}`)
+        setTimeout(() => {
+            createBalloon();
+        }, 1000);
+    }
 };
+
+const displayHearts = () => {
+    const heartElements = document.querySelectorAll('.heart');
+    const loopNumber = 3 - lives; // 3 - 2 = 1
+    if (lives === 2) {
+        for (let i = 0; i < 1; i++) {
+            heartElements[i].classList.add('opacity-half');
+        }
+    } else if (lives === 1) {
+        for (let i = 0; i < 2; i++) {
+            heartElements[i].classList.add('opacity-half');
+        }
+    } else if (lives === 0) {
+        for (let i = 0; i < 2; i++) {
+            heartElements[i].classList.add('opacity-half');
+        }
+    }
+}
 
 const windowResize = () => {
     const screenWidth = window.innerWidth;
@@ -111,14 +139,6 @@ const windowResize = () => {
 
 // Game start
 // ================================================================
-
+// vrButton.remove();
 window.addEventListener('resize', windowResize);
 startGame();
-
-console.log(balloonAnimations);
-
-// ================================================================
-
-// for (let i = 0; i < classname.length; i++) {
-//     classname[i].addEventListener('mouseenter', shootBalloon, false);
-// }

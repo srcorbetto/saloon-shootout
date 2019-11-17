@@ -1,9 +1,52 @@
+html {
+    font-family: 'Arvo', serif;
+}
+
+.life-holder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 300;
+    padding: 15px 5px;
+}
+
+.heart {
+    width: 50px;
+    padding: 0 10px;
+    display: initial;
+}
+
+.timer {
+    position: absolute;
+    top: 0;
+    left: calc(50% - 50px);
+    z-index: 300;
+    width: 100px;
+    color: #fff;
+    /* background: green; */
+    text-align: center;
+    font-weight: 700;
+    font-size: 4em;
+}
+
 .ammo-holder {
     position: absolute;
     bottom: 0;
-    left: calc(50% - 100px);
-    width: 200px;
-    height: 100px;
+    left: calc(50% - 145px);
+    width: 250px;
     background: #333333;
     z-index: 300;
+    text-align: center;
+    padding: 10px 20px 5px 20px;
+    border-radius: 15px 15px 0 0;
+}
+
+.bullet {
+    width: 28px;
+    display: initial;
+    padding: 5px;
+}
+
+.opacity-half {
+    opacity: .5;
 }

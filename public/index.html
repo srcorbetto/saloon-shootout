@@ -6,6 +6,11 @@
     <title>Saloon Shootout!</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Arvo:400,700,700i&display=swap" rel="stylesheet">
+
+    <!-- Style -->
     <link rel="stylesheet" href="/assets/css/style.css">
 
     <!-- AFrame -->
@@ -24,6 +29,7 @@
                 <a-asset-item id="mtnGltf" src="/assets/models/CUPIC_MONTAIN/CUPIC_MONTAIN.gltf" />
                 <a-asset-item id="barrelGltf" src="/assets/models/Barrel/Barrel.gltf" />
                 <a-asset-item id="balloonGltf" src="/assets/models/Balloon/Balloon.gltf" />
+                <a-asset-item id="ammoGltf" src="/assets/models/ammo/ammo.gltf" />
                 <img id="bang" src="/assets/img/bang.png" />
                 <img id="sand" src="/assets/img/sand-900x900.jpg" />
                 <img id="cowboy" src="/assets/img/cowboy.png" />
@@ -44,13 +50,15 @@
                           id="gun">
                 </a-entity>
                 <a-image id="flash"
-                         opacity="0"
                          position=".87 .39 -2.4"
-                         scale="1.25 1.25 1.25"
+                         scale="0 0 0"
                          src="#bang">
                 </a-image>
                 <a-cursor fuse="true"
-                          fuse-timeout="300">
+                          fuse-timeout="300"
+                          geometry="primitive: circle"
+                          material="color: #fff; shader: flat"
+                          scale=".007 .007 .007">
                 </a-cursor>
             </a-entity>
 
@@ -74,6 +82,14 @@
                           src="#cactusGltf"
                           position="8 0 -.75"
                           scale=".5 .5 .5">
+            </a-gltf-model>
+
+            <!-- ammo -->
+            <a-gltf-model id="ammo"
+                          src="#ammoGltf"
+                          position="2 0 .7"
+                          scale=".6 .6 .6"
+                          animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; easing: linear; dur: 8000">
             </a-gltf-model>
 
             <!-- Barrel -->
@@ -142,14 +158,21 @@
                       text="value: 10; align: center; width: 7"
                       position="0 8 -4.1">
             </a-entity>
-            <!-- <div class="ammo-holder"></div> -->
+            <div class="life-holder">
+                <img class="heart" src="https://via.placeholder.com/200x200/cc0000" alt="">
+                <img class="heart" src="https://via.placeholder.com/200x200/cc0000" alt="">
+                <img class="heart" src="https://via.placeholder.com/200x200/cc0000" alt=""> 
+            </div>
+            <div class="ammo-holder">
+                <img class="bullet" src="https://via.placeholder.com/100x200/d4af37" alt="">
+                <img class="bullet" src="https://via.placeholder.com/100x200/d4af37" alt="">
+                <img class="bullet" src="https://via.placeholder.com/100x200/d4af37" alt="">
+                <img class="bullet" src="https://via.placeholder.com/100x200/d4af37" alt="">
+                <img class="bullet" src="https://via.placeholder.com/100x200/d4af37" alt="">
+                <img class="bullet" src="https://via.placeholder.com/100x200/d4af37" alt="">
+            </div>
+            <div class="timer">10</div>
         </a-scene>
-
-        <!-- jQuery -->
-        <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
 
         <!-- Logic -->
         <script src="/assets/js/balloonAnimations.js" async defer></script>
