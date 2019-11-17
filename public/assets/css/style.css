@@ -47,6 +47,26 @@ html {
     padding: 5px;
 }
 
+.score-holder {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    z-index: 300;
+    color: #fff;
+    font-weight: 700;
+    font-size: 4em;
+}
+
+.score-label {
+    float: left;
+}
+
+.score {
+    width: 125px;
+    float: right;
+    text-align: right;
+}
+
 .opacity-half {
-    opacity: .5;
+    opacity: .3;
 }

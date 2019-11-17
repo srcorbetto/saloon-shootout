@@ -1,19 +1,19 @@
 const vrButton = document.querySelector('.a-enter-vr-button');
 const timerElement = document.querySelector('.timer');
+const scoreElement = document.querySelector('.score');
 const sceneElement = document.querySelector('a-scene');
 const camera = document.getElementById('my-camera');
 const gun = document.getElementById('gun');
 const flash = document.getElementById('flash');
 let score = 0;
 let lives = 3;
-let timer = 10;
+let timer = 3;
 let ammo = 6;
 let lifeTimer;
 let gameStart = false;
 
 const startGame = () => {
     const badGuy = document.getElementById('bad-guy');
-
     badGuy.addEventListener('mouseenter', e => {
         if (gameStart === false) {
             gameStart = true;
@@ -26,7 +26,7 @@ const startGame = () => {
                      lives--;
                      displayHearts();
                      console.log(`lives: ${lives}`)
-                     timer = 10;
+                     timer = 3;
                      timerElement.innerHTML = timer;
                      if (lives === 0) {
                         console.log('Game Over');
@@ -34,7 +34,6 @@ const startGame = () => {
                         restartGame();
                      };
                 };
-                //  console.log(`Lives: ${lives}`);
          }, 1000);
         }
     });
@@ -44,8 +43,11 @@ const restartGame = () => {
     gameStart = false;
     score = 0;
     lives = 3;
-    timer = 10;
+    timer = 3;
     ammo = 6;
+
+    displayAmmo();
+    displayHearts();
 
     const remainingBaloons = sceneElement.querySelectorAll('.balloon');
     for (let i = 0; i < remainingBaloons.length; i++) {
@@ -73,6 +75,7 @@ const createBalloon = () => {
 
 const gunShot = () => {
     ammo--;
+    displayAmmo();
     console.log(ammo);
     gun.setAttribute('animation__recoil', {
         property: 'rotation',
@@ -101,7 +104,8 @@ const shootBalloon = e => {
         gunShot();
         targetBaloon.parentNode.removeChild(targetBaloon);
         score++;
-        timer = 10;
+        scoreElement.innerHTML = score;
+        timer = 3;
         timerElement.innerHTML = timer;
         console.log(`Score: ${score}`)
         setTimeout(() => {
@@ -125,6 +129,44 @@ const displayHearts = () => {
         for (let i = 0; i < 2; i++) {
             heartElements[i].classList.add('opacity-half');
         }
+    } else {
+        heartElements.forEach(heart => {
+            heart.classList.remove('opacity-half')
+        });
+    }
+}
+
+const displayAmmo = () => {
+    const bulletElements = document.querySelectorAll('.bullet');
+    const loopNumber = 3 - lives; // 3 - 2 = 1
+    if (ammo === 5) {
+        for (let i = 0; i < 1; i++) {
+            bulletElements[i].classList.add('opacity-half');
+        }
+    } else if (ammo === 4) {
+        for (let i = 0; i < 2; i++) {
+            bulletElements[i].classList.add('opacity-half');
+        }
+    } else if (ammo === 3) {
+        for (let i = 0; i < 3; i++) {
+            bulletElements[i].classList.add('opacity-half');
+        }
+    } else if (ammo === 2) {
+        for (let i = 0; i < 4; i++) {
+            bulletElements[i].classList.add('opacity-half');
+        }
+    } else if (ammo === 1) {
+        for (let i = 0; i < 5; i++) {
+            bulletElements[i].classList.add('opacity-half');
+        }
+    } else if (ammo === 0) {
+        bulletElements.forEach(bullet => {
+            bullet.classList.add('opacity-half')
+        });
+    } else {
+        bulletElements.forEach(bullet => {
+            bullet.classList.remove('opacity-half')
+        });
     }
 }
 
