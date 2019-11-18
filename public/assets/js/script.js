@@ -56,7 +56,6 @@ const restartGame = () => {
 }
 
 const createBalloon = () => {
-    // Balloon animations go here if there's an issue...
     const balloonElement = document.createElement('a-gltf-model');
     const arrayLenth = balloonAnimations.length - 1;
     const randomNumber = Math.floor(Math.random() * (arrayLenth - 0 + 1)) + 0; //The maximum is inclusive and the minimum is inclusive
@@ -176,5 +175,5 @@ const reload = bulletArray => {
 
 // Game start
 // ================================================================
-vrButton.remove();
+// vrButton.remove();
 startGame();
