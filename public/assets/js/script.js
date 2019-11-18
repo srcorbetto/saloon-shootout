@@ -1,6 +1,7 @@
 const vrButton = document.querySelector('.a-enter-vr');
 const timerElement = document.querySelector('.timer');
 const scoreElement = document.querySelector('.score');
+const bloodScreen = document.querySelector('.blood-screen');
 const sceneElement = document.querySelector('a-scene');
 const camera = document.getElementById('my-camera');
 const gun = document.getElementById('revolver');
@@ -24,6 +25,10 @@ const startGame = () => {
                  console.log(`timer: ${timer}`);
                  if (timer === 0) {
                      lives--;
+                    //  bloodScreen.classList.remove('hide');
+                    //  setTimeout(() => {
+                    //     bloodScreen.classList.add('hide');  
+                    //  }, 200);
                      displayHearts();
                      console.log(`lives: ${lives}`)
                      timer = 5;
