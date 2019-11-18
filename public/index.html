@@ -34,9 +34,12 @@
                     <a-asset-item id="mtnGltf" src="/assets/models/CUPIC_MONTAIN/CUPIC_MONTAIN.gltf" />
                     <a-asset-item id="balloonGltf" src="/assets/models/Balloon/Balloon.gltf" />
                     <a-asset-item id="revolverGltf" src="/assets/models/revolver/revolver.gltf" />
+                    <!-- <audio id="gunshotMp3" src="/assets/sound/gun-shot.mp3" preload="auto"></audio> -->
                     <img id="bang" src="/assets/img/bang.png" />
                     <img id="sand" src="/assets/img/sand-900x900.jpg" />
                     <img id="cowboy" src="/assets/img/cowboy.png" />
+                    <img id="start" src="/assets/img/start-1024x343.png" />
+                    <img id="game-over" src="/assets/img/game-over-1024x343.png" />
                 </a-assets>
                 
                 <!-- Camera -->
@@ -68,9 +71,15 @@
                 <a-sky color="#c9e9f6"></a-sky>
     
                 <!-- Bad Guy -->
-                <a-entity id="bad-guy"
+                <!-- <a-entity id="bad-guy"
                             geometry="primitive:plane;width:1;height:3;" position="-1 2.9 -4.3"
                             material="shader: flat;src:#cowboy;alphaTest:0.5;">
+                </a-entity> -->
+
+                <!-- Sign -->
+                <a-entity id="sign"
+                            geometry="primitive:plane;width:4;height:1.333;" position=".035 2.9 -4.3"
+                            material="shader: flat;src:#start">
                 </a-entity>
     
                 <!-- Saloon -->
@@ -91,7 +100,8 @@
                                 class="balloon"
                                 src="#balloonGltf"
                                 position="0 3 0.5"
-                                scale="3 3 3">
+                                scale="3 3 3"
+                                sound="src: #gunshotMp3; on: mouseenter">
                 </a-gltf-model> -->
     
                 <!-- Mountain -->
@@ -151,8 +161,7 @@
                     <div class="score-label">SCORE:</div>
                     <div class="score"></div>
                 </div>
-
-                <!-- <div class="blood-screen hide"></div> -->
+                <img class="logo" src="/assets/img/logo-shadow-600x271.png" alt="">
             </a-scene>
         </div>
 

@@ -14,27 +14,27 @@ let lifeTimer;
 let gameStart = false;
 
 const startGame = () => {
-    const badGuy = document.getElementById('bad-guy');
-    badGuy.addEventListener('mouseenter', e => {
+    const signElement = document.getElementById('sign');
+    signElement.addEventListener('mouseenter', e => {
         if (gameStart === false) {
             gameStart = true;
+            scoreElement.innerHTML = '';
+            signElement.setAttribute('scale', '0 0 0');
             createBalloon();
             lifeTimer = setInterval(() => {
                  timer--;
                  timerElement.innerHTML = timer;
-                 console.log(`timer: ${timer}`);
                  if (timer === 0) {
                      lives--;
-                    //  bloodScreen.classList.remove('hide');
-                    //  setTimeout(() => {
-                    //     bloodScreen.classList.add('hide');  
-                    //  }, 200);
                      displayHearts();
-                     console.log(`lives: ${lives}`)
                      timer = 5;
                      timerElement.innerHTML = timer;
                      if (lives === 0) {
-                        console.log('Game Over');
+                        signElement.setAttribute('material', {
+                            shader: 'flat',
+                            src: '#game-over'
+                        });
+                        signElement.setAttribute('scale', '1 1 1');
                         clearInterval(lifeTimer);
                         restartGame();
                      };
@@ -80,7 +80,6 @@ const createBalloon = () => {
 const gunShot = () => {
     ammo--;
     displayAmmo();
-    console.log(ammo);
     gun.setAttribute('rotation', '-17.745 177.553 0.746');
     gun.setAttribute('position', '-1.269 -3.051 -4.641');
     flash.setAttribute('scale', '1.25 1.25 1.25');
@@ -102,7 +101,6 @@ const shootBalloon = e => {
         scoreElement.innerHTML = score;
         timer = 5;
         timerElement.innerHTML = timer;
-        console.log(`Score: ${score}`)
         setTimeout(() => {
             createBalloon();
         }, 1000);
@@ -158,7 +156,7 @@ const displayAmmo = () => {
         bulletElements.forEach(bullet => {
             bullet.classList.add('opacity-half');
         });
-        reload(bulletElements);
+        reload();
     } else {
         bulletElements.forEach(bullet => {
             bullet.classList.remove('opacity-half');
@@ -166,7 +164,7 @@ const displayAmmo = () => {
     }
 }
 
-const reload = bulletArray => {
+const reload = () => {
     const reloadText = document.querySelector('.reloading');
     reloadText.classList.remove('hide');
     reloadText.classList.add('pulse-animation');
@@ -180,5 +178,4 @@ const reload = bulletArray => {
 
 // Game start
 // ================================================================
-// vrButton.remove();
 startGame();
