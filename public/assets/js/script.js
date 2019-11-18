@@ -1,13 +1,13 @@
-const vrButton = document.querySelector('.a-enter-vr-button');
+const vrButton = document.querySelector('.a-enter-vr');
 const timerElement = document.querySelector('.timer');
 const scoreElement = document.querySelector('.score');
 const sceneElement = document.querySelector('a-scene');
 const camera = document.getElementById('my-camera');
-const gun = document.getElementById('gun');
+const gun = document.getElementById('revolver');
 const flash = document.getElementById('flash');
 let score = 0;
 let lives = 3;
-let timer = 3;
+let timer = 5;
 let ammo = 6;
 let lifeTimer;
 let gameStart = false;
@@ -26,7 +26,7 @@ const startGame = () => {
                      lives--;
                      displayHearts();
                      console.log(`lives: ${lives}`)
-                     timer = 3;
+                     timer = 5;
                      timerElement.innerHTML = timer;
                      if (lives === 0) {
                         console.log('Game Over');
@@ -43,7 +43,7 @@ const restartGame = () => {
     gameStart = false;
     score = 0;
     lives = 3;
-    timer = 3;
+    timer = 5;
     ammo = 6;
 
     displayAmmo();
@@ -77,25 +77,16 @@ const gunShot = () => {
     ammo--;
     displayAmmo();
     console.log(ammo);
-    gun.setAttribute('animation__recoil', {
-        property: 'rotation',
-        to: '-11 183 0',
-        dur: 50
-    });
-    gun.setAttribute('animation__reset', {
-        property: 'rotation',
-        to: '0 183 0',
-        dur: 200,
-        delay: 100
-    });
+    gun.setAttribute('rotation', '-17.745 177.553 0.746');
+    gun.setAttribute('position', '-1.269 -3.051 -4.641');
     flash.setAttribute('scale', '1.25 1.25 1.25');
     setTimeout(() => {
         flash.setAttribute('scale', '0 0 0');
     }, 150);
     setTimeout(() => {
-        gun.removeAttribute('animation__recoil');
-        gun.removeAttribute('animation__reset');
-    }, 400);
+        gun.setAttribute('rotation', '-180 -2.33 -180');
+        gun.setAttribute('position', '-1.269 -4.167 -3.682');
+    }, 200);
 }
 
 const shootBalloon = e => {
@@ -105,7 +96,7 @@ const shootBalloon = e => {
         targetBaloon.parentNode.removeChild(targetBaloon);
         score++;
         scoreElement.innerHTML = score;
-        timer = 3;
+        timer = 5;
         timerElement.innerHTML = timer;
         console.log(`Score: ${score}`)
         setTimeout(() => {
@@ -161,26 +152,29 @@ const displayAmmo = () => {
         }
     } else if (ammo === 0) {
         bulletElements.forEach(bullet => {
-            bullet.classList.add('opacity-half')
+            bullet.classList.add('opacity-half');
         });
+        reload(bulletElements);
     } else {
         bulletElements.forEach(bullet => {
-            bullet.classList.remove('opacity-half')
+            bullet.classList.remove('opacity-half');
         });
     }
 }
 
-const windowResize = () => {
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    // console.log(window.innerWidth,window.innerHeight)
-    if (screenWidth <= 414) {
-        gun.setAttribute('position', '.3 -1 -1.4')
-    }
+const reload = bulletArray => {
+    const reloadText = document.querySelector('.reloading');
+    reloadText.classList.remove('hide');
+    reloadText.classList.add('pulse-animation');
+    setTimeout(() => {
+        ammo = 6;
+        reloadText.classList.add('hide');
+        reloadText.classList.remove('pulse-animation');
+        displayAmmo();
+    }, 2000);
 }
 
 // Game start
 // ================================================================
-// vrButton.remove();
-window.addEventListener('resize', windowResize);
+vrButton.remove();
 startGame();

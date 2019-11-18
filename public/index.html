@@ -19,7 +19,7 @@
     <style>
         a-scene {
             width: 100%;
-            height: 95vh;    
+            height: 95vh;  
         }
     </style>
 </head>
@@ -29,14 +29,11 @@
             <a-scene embedded>
                 <!-- Preloaded Assets -->
                 <a-assets>
-                    <a-asset-item id="gunObj" src="/assets/models/gun/gun.obj" />
-                    <a-asset-item id="gunMtl" src="/assets/models/gun/gun.mtl" />
                     <a-asset-item id="saloonGltf" src="/assets/models/saloon/Saloon.gltf" />
                     <a-asset-item id="cactusGltf" src="/assets/models/PipeOrganCactus/PipeOrganCactus.gltf" />
                     <a-asset-item id="mtnGltf" src="/assets/models/CUPIC_MONTAIN/CUPIC_MONTAIN.gltf" />
-                    <a-asset-item id="barrelGltf" src="/assets/models/Barrel/Barrel.gltf" />
                     <a-asset-item id="balloonGltf" src="/assets/models/Balloon/Balloon.gltf" />
-                    <a-asset-item id="ammoGltf" src="/assets/models/ammo/ammo.gltf" />
+                    <a-asset-item id="revolverGltf" src="/assets/models/revolver/revolver.gltf" />
                     <img id="bang" src="/assets/img/bang.png" />
                     <img id="sand" src="/assets/img/sand-900x900.jpg" />
                     <img id="cowboy" src="/assets/img/cowboy.png" />
@@ -50,22 +47,20 @@
                             data-aframe-inspector-original-camera=""
                             look-controls
                             position="-.18 1.6 6.3">
-                    <a-entity obj-model="obj: #gunObj; mtl: #gunMtl"
-                                rotation="-1 183 0"
-                                scale=".25 .25 .25"
-                                position=".64 -1 -1.4"
-                                id="gun">
-                    </a-entity>
+                    <a-gltf-model id="revolver"
+                                  src="#revolverGltf"
+                                  position="-1.269 -4.167 -3.682"
+                                  rotation="-180 -2.33 -180"
+                                  scale="2 2 2">
+                    </a-gltf-model>
                     <a-image id="flash"
-                                position=".87 .39 -2.4"
+                                position=".87 .89 -2.49"
                                 scale="0 0 0"
                                 src="#bang">
                     </a-image>
-                    <a-cursor fuse="true"
-                                fuse-timeout="300"
-                                geometry="primitive: circle"
-                                material="color: #fff; shader: flat"
-                                scale=".007 .007 .007">
+                    <a-cursor geometry="primitive: circle"
+                              material="color: #fff; shader: flat"
+                              scale=".007 .007 .007">
                     </a-cursor>
                 </a-entity>
     
@@ -91,55 +86,31 @@
                                 scale=".5 .5 .5">
                 </a-gltf-model>
     
-                <!-- ammo -->
-                <a-gltf-model id="ammo"
-                                src="#ammoGltf"
-                                position="2 0 .7"
-                                scale=".6 .6 .6"
-                                animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; easing: linear; dur: 8000">
-                </a-gltf-model>
-    
-                <!-- Barrel -->
-                <a-gltf-model id="barrel"
-                                src="#barrelGltf"
-                                position="8 0 -.75"
-                                scale=".5 .5 .5">
-                </a-gltf-model>
-    
-                <!-- Balloon -->
-                <!-- <a-gltf-model id="balloon1"
-                                class="balloon"
-                                src="#balloonGltf"
-                                position="0 3 0.5"
-                                scale="3 3 3"
-                                animation="property: position; to: 0 4 0.5; loop: true; dur: 3000; dir: alternate">
-                </a-gltf-model>
-    
                 <!-- Mountain -->
                 <a-gltf-model id="mtn"
                                 src="#mtnGltf"
-                                position="29.25 5.231 -59.343"
+                                position="29.25 5.231 -47.234"
                                 scale=".1 .1 .1">
                 </a-gltf-model>
                 <a-gltf-model id="mtn2"
                                 src="#mtnGltf"
-                                position="-13 3.5 -59.343"
+                                position="-13 3.5 -55.588"
                                 scale=".1 .07 .1">
                 </a-gltf-model>
                 <a-gltf-model id="mtn3"
                                 src="#mtnGltf"
-                                position="62.8 3.1 -10"
+                                position="42.892 3.1 -10"
                                 scale=".1 .06 .16">
                 </a-gltf-model>
                 <a-gltf-model id="mtn4"
                                 src="#mtnGltf"
-                                position="6.4 3.1 58.7"
+                                position="6.4 3.1 40.849"
                                 scale=".1 .06 .16"
                                 rotation="0 90 0">
                 </a-gltf-model>
                 <a-gltf-model id="mtn5"
                                 src="#mtnGltf"
-                                position="-51.6 3.1 -5.78"
+                                position="-41.387 3.1 -5.78"
                                 scale=".1 .1.5 .16">
                 </a-gltf-model>
     
@@ -153,17 +124,13 @@
                             roughness="2">
                 </a-plane>
     
-                <!-- Text -->
-                <!-- <a-entity id="text-timer"
-                            text="value: 10; align: center; width: 7"
-                            position="0 8 -4.1">
-                </a-entity> -->
                 <div class="life-holder">
                     <img class="heart" src="/assets/img/heart.svg" alt="">
                     <img class="heart" src="/assets/img/heart.svg" alt="">
                     <img class="heart" src="/assets/img/heart.svg" alt=""> 
                 </div>
                 <div class="ammo-holder">
+                    <div class="reloading hide">RELOADING!</div>
                     <img class="bullet" src="/assets/img/bullet.svg" alt="">
                     <img class="bullet" src="/assets/img/bullet.svg" alt="">
                     <img class="bullet" src="/assets/img/bullet.svg" alt="">
@@ -176,6 +143,8 @@
                     <div class="score-label">SCORE:</div>
                     <div class="score"></div>
                 </div>
+
+                <!-- <div class="blood-screen hide"></div> -->
             </a-scene>
         </div>
 

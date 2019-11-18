@@ -7,8 +7,10 @@ body {
 }
 
 .aframe-wrapper {
-    max-width: 90%;
+    max-width: 80%;
     max-height: 95vh;
+    margin: 0;
+    padding: 0;
     margin: 2.5vh auto;
     /* -webkit-box-shadow: 10px 10px 5px -4px rgba(51,51,51,0.31);
     -moz-box-shadow: 10px 10px 5px -4px rgba(51,51,51,0.31);
@@ -60,6 +62,18 @@ body {
     padding: 5px;
 }
 
+.reloading {
+    color: #fff;
+    position: absolute;
+    top: 34px;
+    width: 250px;
+    text-align: center;
+    z-index: 350;
+    font-size: 2.1em;
+    font-weight: 700;
+    display: block;  
+}
+
 .score-holder {
     position: absolute;
     top: 0;
@@ -80,6 +94,38 @@ body {
     text-align: right;
 }
 
+.blood-screen {
+    width: 100%;
+    height: 100vh;
+    opacity: .8;
+    background: #400000;
+    position: absolute;
+    top: 0;
+    z-index: 500;
+}
+
 .opacity-half {
     opacity: .3;
+}
+
+.hide {
+    display: none;
+}
+
+.pulse-animation {
+    animation: pulse 1s linear infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.25);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
